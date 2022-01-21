@@ -8,7 +8,7 @@ export const colors = {
 export const fontSizes = {
     large: 'clamp(1.6rem, 2.5vw, 3.2rem)',
     medium: 'clamp(1.2rem, 1.5vw, 2rem)',
-    small: 'clamp(0.8rem, 0.8vw, 1.5rem)',
+    small: 'clamp(1rem, 0.9vw, 1.6rem)',
 }
 
 export const fontFamily = {

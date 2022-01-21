@@ -13,6 +13,7 @@ export function getLatestMovies() {
                 poster_path: resourcesImgURL + movie.poster_path,
                 id: movie.id,
                 title: movie.title,
+                vote_average: movie.vote_average,
             }))
         )
         .catch((err) => new Error(err))

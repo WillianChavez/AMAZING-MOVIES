@@ -35,8 +35,8 @@ export default function Slider() {
 
     return (
         <Slides id="slides">
-            {movies.map(({ id, title, poster_path }) => (
-                <MovieSlide key={id} title={title} posterPath={poster_path} />
+            {movies.map(({ id, title, poster_path, vote_average }) => (
+                <MovieSlide key={id} title={title} posterPath={poster_path} voteAverage={vote_average} />
             ))}
         </Slides>
     )

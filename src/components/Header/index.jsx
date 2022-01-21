@@ -4,8 +4,11 @@ const MainHeader = styled.header`
     & {
         background-image: linear-gradient(hsl(${colors.black}), hsl(${colors.gray}));
         border-radius: 0 0 15px 15px;
-        padding: 1em;
+        padding: 2em;
         margin-bottom: 3em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 `
 

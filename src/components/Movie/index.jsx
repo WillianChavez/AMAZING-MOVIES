@@ -20,24 +20,55 @@ const MovieItem = styled.article`
         margin: 0 1em;
     }
 `
+
+const Rating = styled.div`
+    & {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 40px;
+        padding: 1em;
+        display: flex;
+        width: 80px;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: ${fontSizes.small};
+        font-weight: bold;
+        background-color: hsla(${colors.black}, 0.5);
+    }
+`
+const Start = styled.div`
+    & {
+        background-color: hsl(${colors.orange});
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        height: 30px;
+        margin-left: 0.4em;
+        width: 40px;
+    }
+`
 const MovieImgContainer = styled.div`
     & {
         height: 80%;
     }
 `
+
 const MovieTitle = styled.p`
     & {
         text-align: center;
         border-radius: 30px;
         font-size: ${fontSizes.medium};
         font-weight: bold;
-        height: 20%;
+        height: 50px;
     }
 `
 
-export default function Movie({ title, posterPath }) {
+export default function Movie({ title, posterPath, voteAverage }) {
     return (
         <MovieItem>
+            <Rating>
+                <p>{voteAverage}</p>
+                <Start />
+            </Rating>
             <MovieImgContainer>
                 <img src={posterPath} alt={title} />
             </MovieImgContainer>
@@ -45,7 +76,7 @@ export default function Movie({ title, posterPath }) {
         </MovieItem>
     )
 }
-export function MovieSlide({ title, posterPath }) {
+export function MovieSlide(props) {
     const ref = useRef()
     let el = ref.current
     const [isActive, setIsActive] = useState(false)
@@ -81,7 +112,7 @@ export function MovieSlide({ title, posterPath }) {
 
     return (
         <div ref={ref}>
-            <Movie title={title} posterPath={posterPath} />
+            <Movie {...props} />
         </div>
     )
 }
