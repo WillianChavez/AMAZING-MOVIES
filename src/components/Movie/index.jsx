@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { colors, fontSizes } from './../../stylesConfig'
+import { useEffect, useState, useRef } from 'react'
+import { colors, fontSizes } from '../../stylesConfig'
 
 const MovieItem = styled.article`
     & {
@@ -42,5 +43,45 @@ export default function Movie({ title, posterPath }) {
             </MovieImgContainer>
             <MovieTitle>{title}</MovieTitle>
         </MovieItem>
+    )
+}
+export function MovieSlide({ title, posterPath }) {
+    const ref = useRef()
+    let el = ref.current
+    const [isActive, setIsActive] = useState(false)
+
+    const intersectingMovie = (entries) => {
+        const [entry] = entries
+        setIsActive(entry.isIntersecting)
+    }
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(intersectingMovie, {
+            root: document.querySelector('#slides'),
+            threshold: 0.6,
+        })
+        if (ref.current) {
+            observer.observe(ref.current)
+        }
+
+        return () => {
+            if (el) {
+                observer.unobserve(el)
+            }
+        }
+    }, [el])
+
+    useEffect(() => {
+        if (ref.current && isActive) {
+            ref.current.firstChild.classList.add('active')
+        } else if (ref.current && !isActive) {
+            ref.current.firstChild.classList.remove('active')
+        }
+    }, [isActive])
+
+    return (
+        <div ref={ref}>
+            <Movie title={title} posterPath={posterPath} />
+        </div>
     )
 }
