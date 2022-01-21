@@ -29,7 +29,7 @@ export default function Header() {
     return (
         <MainHeader>
             <LogoContainer>
-                <img src="icon.png" alt="Logo amazing movies" class="logo" />
+                <img src="icon.png" alt="Logo amazing movies" />
             </LogoContainer>
         </MainHeader>
     )
