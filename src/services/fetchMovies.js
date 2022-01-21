@@ -8,6 +8,12 @@ export function getLatestMovies() {
 
     return fetch(url)
         .then((res) => res.json())
-        .then(({ results }) => results.slice(0, 8))
+        .then(({ results }) =>
+            results.slice(0, 8).map((movie) => ({
+                poster_path: resourcesImgURL + movie.poster_path,
+                id: movie.id,
+                title: movie.title,
+            }))
+        )
         .catch((err) => new Error(err))
 }
