@@ -8,7 +8,7 @@ const IconItem = styled.i`
     }
 `
 
-export default function Icon({ name = 'far fa-heart', color = 'white', size = '1.5em' }) {
+export default function Icon({ name = 'ph-heart', color = 'white', size = '1.5em' }) {
     return (
         <IconItem color={color} size={size}>
             <i className={name}></i>

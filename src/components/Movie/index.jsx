@@ -1,8 +1,17 @@
 import styled from 'styled-components'
-import { useEffect, useState, useRef } from 'react'
 import { colors, fontSizes } from '../../stylesConfig'
 
-const MovieItem = styled.article`
+const MovieContainer = styled.article`
+    & {
+        min-height: 350px;
+        max-width: 500px;
+        max-height: 600px;
+        min-width: 250px;
+        position: relative;
+    }
+`
+
+const MovieItem = styled.div`
     & {
         min-height: 350px;
         max-width: 500px;
@@ -12,7 +21,9 @@ const MovieItem = styled.article`
         border: 1px solid hsl(${colors.white}, 0.2);
 
         overflow: hidden;
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
         transition: all 1s ease;
     }
     &.active {
@@ -64,55 +75,17 @@ const MovieTitle = styled.p`
 
 export default function Movie({ title, posterPath, voteAverage }) {
     return (
-        <MovieItem>
-            <Rating>
-                <p>{voteAverage}</p>
-                <Start />
-            </Rating>
-            <MovieImgContainer>
-                <img src={posterPath} alt={title} />
-            </MovieImgContainer>
-            <MovieTitle>{title}</MovieTitle>
-        </MovieItem>
-    )
-}
-export function MovieSlide(props) {
-    const ref = useRef()
-    let el = ref.current
-    const [isActive, setIsActive] = useState(false)
-
-    const intersectingMovie = (entries) => {
-        const [entry] = entries
-        setIsActive(entry.isIntersecting)
-    }
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(intersectingMovie, {
-            root: document.querySelector('#slides'),
-            threshold: 0.6,
-        })
-        if (ref.current) {
-            observer.observe(ref.current)
-        }
-
-        return () => {
-            if (el) {
-                observer.unobserve(el)
-            }
-        }
-    }, [el])
-
-    useEffect(() => {
-        if (ref.current && isActive) {
-            ref.current.firstChild.classList.add('active')
-        } else if (ref.current && !isActive) {
-            ref.current.firstChild.classList.remove('active')
-        }
-    }, [isActive])
-
-    return (
-        <div ref={ref}>
-            <Movie {...props} />
-        </div>
+        <MovieContainer>
+            <MovieItem>
+                <Rating>
+                    <p>{voteAverage}</p>
+                    <Start />
+                </Rating>
+                <MovieImgContainer>
+                    <img src={posterPath} alt={title} />
+                </MovieImgContainer>
+                <MovieTitle>{title}</MovieTitle>
+            </MovieItem>
+        </MovieContainer>
     )
 }

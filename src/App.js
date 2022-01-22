@@ -2,7 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 import { colors, fontFamily } from './stylesConfig'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
-
+import Movies from './pages/Movies'
+import Aside from './components/Aside'
 const GlobalStyle = createGlobalStyle`
 
     * {
@@ -23,12 +24,16 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
     return (
-        <BrowserRouter>
-            <GlobalStyle />
-            <Routes>
-                <Route path="/" element={<Home />} />
-            </Routes>
-        </BrowserRouter>
+        <>
+            <BrowserRouter>
+                <GlobalStyle />
+                <Aside />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/movies/:category" element={<Movies />} />
+                </Routes>
+            </BrowserRouter>
+        </>
     )
 }
 
