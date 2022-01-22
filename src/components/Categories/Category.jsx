@@ -1,11 +1,14 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { colors } from './../../stylesConfig'
-const CategoryItem = styled.li`
+const CategoryItem = styled(Link)`
     & {
         border-radius: 30px;
         overflow: hidden;
         flex-basis: calc(300px - 1em);
         flex-grow: 1;
+        text-decoration: none;
+        color: hsl(${colors.white});
     }
 `
 
@@ -30,7 +33,7 @@ const Title = styled.h2`
 
 export default function Category({ title, imgPath }) {
     return (
-        <CategoryItem>
+        <CategoryItem to={`category/${title}`}>
             <ImgContainer>
                 <img src={imgPath} alt={title} />
             </ImgContainer>
