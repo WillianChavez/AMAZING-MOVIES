@@ -36,7 +36,7 @@ export default function MovieSlide(props) {
     }, [isActive])
 
     return (
-        <div ref={ref} className="hola">
+        <div ref={ref}>
             <Movie {...props} />
         </div>
     )
