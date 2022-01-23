@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { colors } from './../../stylesConfig'
+import { colors } from '../../stylesConfig'
 const CategoryItem = styled(Link)`
     & {
         border-radius: 30px;

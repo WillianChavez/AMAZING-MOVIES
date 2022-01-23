@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const IconItem = styled.i`
     & {
-        color: ${(props) => (props.color == '' ? 'inherit' : props.color)};
+        color: ${(props) => (props.color === '' ? 'inherit' : props.color)};
         font-size: ${(props) => props.size};
         display: inline-block;
     }

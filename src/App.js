@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Movies from './pages/Movies'
 import Aside from './components/Aside'
+import Header from './components/Header'
 const GlobalStyle = createGlobalStyle`
 
     * {
@@ -18,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
 
     img {
         max-width: 100%;
+        width: 100%;
         height: 100%;
     }
 `
@@ -27,10 +29,19 @@ function App() {
         <>
             <BrowserRouter>
                 <GlobalStyle />
+                <Header />
                 <Aside />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/movies/:category" element={<Movies />} />
+                    <Route path="/category/:category" element={<Movies />} />
+                    <Route
+                        path="*"
+                        element={
+                            <main style={{ padding: '1rem' }}>
+                                <p>There's nothing here!</p>
+                            </main>
+                        }
+                    />
                 </Routes>
             </BrowserRouter>
         </>

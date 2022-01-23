@@ -3,20 +3,28 @@ import { colors, fontSizes } from '../../stylesConfig'
 
 const MovieContainer = styled.article`
     & {
-        min-height: 350px;
-        max-width: 500px;
+        min-height: 500px;
         max-height: 600px;
-        min-width: 250px;
+        min-width: 230px;
+
+        flex-grow: 1;
+        flex-basis: 100px;
         position: relative;
+    }
+    @media screen and (max-width: 588px) {
+        & {
+            min-width: 300px;
+            flex-grow: 0;
+            flex-basis: 250px;
+            position: relative;
+        }
     }
 `
 
 const MovieItem = styled.div`
     & {
-        min-height: 350px;
-        max-width: 500px;
-        max-height: 600px;
-        min-width: 250px;
+        width: 100%;
+        height: 100%;
         border-radius: 30px;
         border: 1px solid hsl(${colors.white}, 0.2);
 
@@ -40,7 +48,7 @@ const Rating = styled.div`
         height: 40px;
         padding: 1em;
         display: flex;
-        width: 80px;
+        width: 85px;
         justify-content: space-evenly;
         align-items: center;
         font-size: ${fontSizes.small};
@@ -60,6 +68,7 @@ const Start = styled.div`
 const MovieImgContainer = styled.div`
     & {
         height: 80%;
+        width: 100%;
     }
 `
 

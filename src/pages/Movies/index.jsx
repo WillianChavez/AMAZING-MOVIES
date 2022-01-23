@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { colors } from '../../stylesConfig'
+import ListOfMovies from './LIstOfMovies'
 
 const Main = styled.main`
     & {
@@ -15,6 +17,22 @@ const Main = styled.main`
         }
     }
 `
+const SectionMovies = styled.section`
+    & {
+        border-radius: 30px 30px 0 0;
+        min-height: 100vh;
+        margin-top: 2em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        background-image: linear-gradient(hsl(${colors.gray}), hsl(${colors.black}));
+    }
+`
 export default function Movies() {
-    return <Main>Movies results</Main>
+    return (
+        <Main>
+            <SectionMovies>
+                <ListOfMovies />
+            </SectionMovies>
+        </Main>
+    )
 }
