@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 import { colors } from '../../stylesConfig'
 import ListOfMovies from './LIstOfMovies'
+import Pagination from './../../components/Pagination'
+
+import { useState, useEffect } from 'react'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { getMoviesByCategory } from '../../services/fetchMovies'
 
 const Main = styled.main`
     & {
@@ -27,12 +32,56 @@ const SectionMovies = styled.section`
         background-image: linear-gradient(hsl(${colors.gray}), hsl(${colors.black}));
     }
 `
+
 export default function Movies() {
+    let params = useParams()
+    const [, setCategory] = useState(params.category)
+
+    let [searchParams] = useSearchParams()
+    const [page, setPage] = useState(1)
+    const [movies, setMovies] = useState([])
+
+    const nextPage = () => {
+        let intPage = parseInt(page)
+        setPage(intPage + 1)
+    }
+
+    const prevPage = () => {
+        let intPage = parseInt(page)
+
+        if (intPage !== 1) {
+            setPage(intPage - 1)
+        }
+    }
+
+    useEffect(() => {
+        getMoviesByCategory(params.category, page).then((res) => {
+            setMovies(res)
+        })
+    }, [page, params.category])
+
+    useEffect(() => {
+        if (searchParams.get('page')) {
+            if (searchParams.get('page') !== '1') {
+                setPage(searchParams.get('page'))
+            }
+        }
+    }, [searchParams])
+
+    useEffect(() => {
+        setCategory((prevCategory) => {
+            if (prevCategory !== params.category) {
+                setPage(1)
+                return params.category
+            }
+        })
+    }, [params.category])
     return (
         <Main>
             <SectionMovies>
-                <ListOfMovies />
+                <ListOfMovies movies={movies} />
             </SectionMovies>
+            <Pagination nextPage={nextPage} prevPage={prevPage} page={page} />
         </Main>
     )
 }
