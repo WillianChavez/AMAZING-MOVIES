@@ -16,7 +16,7 @@ export default function ListOfMovies({ movies = [] }) {
     return (
         <List>
             {movies.map((movie) => (
-                <Movie key={movie.id} posterPath={movie.poster_path} voteAverage={movie.vote_average} title={movie.title} />
+                <Movie key={movie.id} id={movie.id} posterPath={movie.poster_path} voteAverage={movie.vote_average} title={movie.title} />
             ))}
         </List>
     )

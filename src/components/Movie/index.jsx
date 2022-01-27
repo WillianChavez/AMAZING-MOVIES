@@ -1,14 +1,19 @@
 import styled from 'styled-components'
 import { colors, fontSizes } from '../../stylesConfig'
+import { Link } from 'react-router-dom'
+import Rating from '../Rating'
 
-const MovieContainer = styled.article`
+const MovieContainer = styled(Link)`
     & {
         min-height: 500px;
         max-height: 600px;
         min-width: 230px;
+        text-decoration: none;
+        color: hsl(${colors.white});
 
         flex-grow: 1;
         flex-basis: 100px;
+        display: block;
         position: relative;
     }
     @media screen and (max-width: 588px) {
@@ -20,7 +25,6 @@ const MovieContainer = styled.article`
         }
     }
 `
-
 const MovieItem = styled.div`
     & {
         width: 100%;
@@ -40,31 +44,14 @@ const MovieItem = styled.div`
     }
 `
 
-const Rating = styled.div`
+const RatingContainer = styled.div`
     & {
         position: absolute;
         top: 0;
         right: 0;
-        height: 40px;
-        padding: 1em;
-        display: flex;
-        width: 85px;
-        justify-content: space-evenly;
-        align-items: center;
-        font-size: ${fontSizes.small};
-        font-weight: bold;
-        background-color: hsla(${colors.black}, 0.5);
     }
 `
-const Start = styled.div`
-    & {
-        background-color: hsl(${colors.orange});
-        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-        height: 30px;
-        margin-left: 0.4em;
-        width: 40px;
-    }
-`
+
 const MovieImgContainer = styled.div`
     & {
         height: 80%;
@@ -82,14 +69,13 @@ const MovieTitle = styled.p`
     }
 `
 
-export default function Movie({ title, posterPath, voteAverage }) {
+export default function Movie({ title, posterPath, voteAverage, id }) {
     return (
-        <MovieContainer>
+        <MovieContainer to={`/movie/${id}`}>
             <MovieItem>
-                <Rating>
-                    <p>{voteAverage}</p>
-                    <Start />
-                </Rating>
+                <RatingContainer>
+                    <Rating text={voteAverage} fontSize={fontSizes.small} />
+                </RatingContainer>
                 <MovieImgContainer>
                     <img src={posterPath} alt={title} />
                 </MovieImgContainer>

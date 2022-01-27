@@ -37,6 +37,10 @@ const PaginnationButton = styled(Link)`
         padding: 0.3em;
         cursor: pointer;
     }
+    &.disable {
+        pointer-events: none;
+        color: hsl(${colors.gray});
+    }
 `
 
 export default function Pagination({ page = 1, nextPage, prevPage }) {
@@ -44,7 +48,7 @@ export default function Pagination({ page = 1, nextPage, prevPage }) {
     return (
         <Footer>
             <PaginationContainer>
-                <PaginnationButton to={`?page=${intPage - 1}`} onClick={prevPage}>
+                <PaginnationButton to={`?page=${intPage - 1}`} className={page === 1 ? 'disable' : ''} onClick={prevPage}>
                     &lt;
                 </PaginnationButton>
 

@@ -6,22 +6,8 @@ import Pagination from './../../components/Pagination'
 import { useState, useEffect } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { getMoviesByCategory } from '../../services/fetchMovies'
+import ContainerMain from '../../components/ContainerMain'
 
-const Main = styled.main`
-    & {
-        margin-left: 175px;
-    }
-    @media screen and (max-width: 768px) {
-        & {
-            margin-left: 70px;
-        }
-    }
-    @media screen and (max-width: 460px) {
-        & {
-            margin-left: 0px;
-        }
-    }
-`
 const SectionMovies = styled.section`
     & {
         border-radius: 30px 30px 0 0;
@@ -37,7 +23,7 @@ export default function Movies() {
     let params = useParams()
     const [, setCategory] = useState(params.category)
 
-    let [searchParams] = useSearchParams()
+    let [searchParams, setSearchParams] = useSearchParams()
     const [page, setPage] = useState(1)
     const [movies, setMovies] = useState([])
 
@@ -48,10 +34,7 @@ export default function Movies() {
 
     const prevPage = () => {
         let intPage = parseInt(page)
-
-        if (intPage !== 1) {
-            setPage(intPage - 1)
-        }
+        setPage(intPage - 1)
     }
 
     useEffect(() => {
@@ -62,11 +45,14 @@ export default function Movies() {
 
     useEffect(() => {
         if (searchParams.get('page')) {
-            if (searchParams.get('page') !== '1') {
+            let intPage = parseInt(searchParams.get('page'))
+            if (intPage >= 1) {
                 setPage(searchParams.get('page'))
+            } else {
+                setSearchParams(searchParams.delete('page'))
             }
         }
-    }, [searchParams])
+    }, [searchParams, setSearchParams])
 
     useEffect(() => {
         setCategory((prevCategory) => {
@@ -77,11 +63,11 @@ export default function Movies() {
         })
     }, [params.category])
     return (
-        <Main>
+        <ContainerMain>
             <SectionMovies>
                 <ListOfMovies movies={movies} />
             </SectionMovies>
             <Pagination nextPage={nextPage} prevPage={prevPage} page={page} />
-        </Main>
+        </ContainerMain>
     )
 }

@@ -20,6 +20,27 @@ export function getLatestMovies() {
         .catch((err) => new Error(err))
 }
 
+export function getMovieById(id = '') {
+    let url = `${baseURL}movie/${id}?api_key=${apiKey}&language=en-US`
+
+    return fetch(url)
+        .then((res) => res.json())
+        .then((movie) => ({
+            backdrop_path: resourcesImgURL + movie.backdrop_path,
+            genres: movie.genres.map((genre) => genre.name),
+            homepage: movie.homepage,
+            overview: movie.overview,
+            production_companies: movie.production_companies.map((company) => {
+                return {
+                    name: company.name,
+                    logo_path: resourcesImgURL + company.logo_path,
+                    origin_country: company.origin_country,
+                }
+            }),
+            release_date: movie.release_date,
+            title: movie.title,
+        }))
+}
 export function getNameCategories() {
     const categories = ['action', 'romance', 'comedy', 'kids', 'horror', 'thriller']
     return categories

@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Movies from './pages/Movies'
 import Aside from './components/Aside'
 import Header from './components/Header'
+import Details from './pages/Details'
 const GlobalStyle = createGlobalStyle`
 
     * {
@@ -34,6 +35,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/category/:category" element={<Movies />} />
+                    <Route path="/movie/:id" element={<Details />} />
                     <Route
                         path="*"
                         element={
