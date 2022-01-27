@@ -44,7 +44,7 @@ export default function Slider() {
             <Title>Latest Movies</Title>
             <Slides id="slides">
                 {movies.map(({ id, title, poster_path, vote_average }) => (
-                    <MovieSlide key={id} title={title} posterPath={poster_path} voteAverage={vote_average} />
+                    <MovieSlide key={id} title={title} posterPath={poster_path} voteAverage={vote_average} id={id} />
                 ))}
             </Slides>
         </section>

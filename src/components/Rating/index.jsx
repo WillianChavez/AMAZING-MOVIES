@@ -3,19 +3,20 @@ import { colors, fontSizes } from '../../stylesConfig'
 
 const RatingContainer = styled.div`
     & {
-        height: 40px;
+        min-height: 40px;
+        max-height: 50px;
         padding: 1em;
         display: flex;
-        width: 85px;
-        justify-content: space-evenly;
+        min-width: 85px;
+        justify-content: start;
         align-items: center;
-        background-color: hsla(${colors.black}, 0.5);
     }
 `
 const Text = styled.p`
     & {
         font-size: ${(props) => props.fontSize || fontSizes.medium};
         font-weight: bold;
+        margin: 0;
     }
 `
 const Start = styled.div`
@@ -24,14 +25,14 @@ const Start = styled.div`
         clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         height: 30px;
         margin-left: 0.4em;
-        width: 40px;
+        width: 30px;
     }
 `
 
-export default function Rating({ text = 0, fontSize }) {
+export default function Rating({ text = '', fontSize }) {
     return (
         <RatingContainer>
-            <Text fontSize={fontSizes}>{text}</Text>
+            <Text fontSize={fontSize}>{text}</Text>
             <Start />
         </RatingContainer>
     )

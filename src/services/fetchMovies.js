@@ -26,8 +26,8 @@ export function getMovieById(id = '') {
     return fetch(url)
         .then((res) => res.json())
         .then((movie) => ({
-            backdrop_path: resourcesImgURL + movie.backdrop_path,
-            genres: movie.genres.map((genre) => genre.name),
+            backdrop_path: `${resourcesImgURL + movie.poster_path}`,
+            genres: movie.genres,
             homepage: movie.homepage,
             overview: movie.overview,
             production_companies: movie.production_companies.map((company) => {
@@ -39,6 +39,7 @@ export function getMovieById(id = '') {
             }),
             release_date: movie.release_date,
             title: movie.title,
+            vote_average: parseFloat(movie.vote_average).toFixed(1),
         }))
 }
 export function getNameCategories() {

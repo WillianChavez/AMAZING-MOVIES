@@ -1,22 +1,36 @@
 import styled from 'styled-components'
-import { colors } from '../../stylesConfig'
-
+import noImg from './../../assets/no-image.png'
 const Container = styled.div`
     & {
         overflow: hidden;
-        max-height: 500px;
-        border-radius: 30px 30px 0 0;
+        border-radius: 30px 0 0 0;
+        max-width: 350px;
+        height: auto;
+    }
+
+    @media screen and (max-width: 667px) {
+        & {
+            border-radius: 0;
+        }
     }
 `
 
 const Img = styled.img`
     & {
         object-fit: cover;
-        mask-image: linear-gradient(hsl(${colors.black}), hsl(${colors.black} / 0.5));
+        max-height: 300px;
+        object-position: top;
+
+        @media screen and (max-width: 667px) {
+            & {
+                max-height: 400px;
+            }
+        }
     }
 `
 
-export default function Backdrop({ imgPath, title }) {
+export default function Backdrop({ imgPath = noImg, title }) {
+    if (imgPath.endsWith('null')) imgPath = noImg
     return (
         <Container>
             <Img src={imgPath} alt={title} />
