@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Movie from '../../components/Movie'
+import Spiner from '../../components/Spiner'
 const List = styled.ul`
     & {
         display: flex;
@@ -12,7 +13,8 @@ const List = styled.ul`
     }
 `
 
-export default function ListOfMovies({ movies = [] }) {
+export default function ListOfMovies({ movies = [], loading }) {
+    if (loading) return <Spiner />
     return (
         <List>
             {movies.map((movie) => (

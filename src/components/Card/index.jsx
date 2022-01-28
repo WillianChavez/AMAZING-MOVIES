@@ -11,7 +11,10 @@ const Container = styled.article`
 
 const ImgContainer = styled.div`
     & {
-        height: 100px;
+        height: 130px;
+
+        background-color: hsl(${colors.white});
+        padding: 0.5em;
     }
 `
 const Img = styled.img`
@@ -30,6 +33,7 @@ const Text = styled.p`
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 0;
     }
 `
 export default function Card({ imgPath = noImg, text }) {
