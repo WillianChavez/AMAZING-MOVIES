@@ -6,6 +6,7 @@ const Container = styled.article`
     & {
         flex-basis: 350px;
         height: auto;
+        box-shadow: 0 2px 6px rgba(241, 241, 241, 0.486);
     }
 `
 
