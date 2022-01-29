@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
+import styled from 'styled-components'
 import Movie from '../Movie/'
 
+const Container = styled.div`
+    & {
+        scroll-snap-align: start;
+    }
+`
 export default function MovieSlide(props) {
     const ref = useRef()
     let el = ref.current
@@ -14,7 +20,7 @@ export default function MovieSlide(props) {
     useEffect(() => {
         const observer = new IntersectionObserver(intersectingMovie, {
             root: document.querySelector('#slides'),
-            threshold: 0.66,
+            threshold: 0.3,
         })
         if (ref.current) {
             observer.observe(ref.current)
@@ -36,8 +42,8 @@ export default function MovieSlide(props) {
     }, [isActive])
 
     return (
-        <div ref={ref}>
+        <Container ref={ref}>
             <Movie {...props} />
-        </div>
+        </Container>
     )
 }

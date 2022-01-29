@@ -35,6 +35,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/category/:category" element={<Movies />} />
+
+                    <Route path="/search/:results" element={<Movies />} />
                     <Route path="/movie/:id" element={<Details />} />
                     <Route
                         path="*"

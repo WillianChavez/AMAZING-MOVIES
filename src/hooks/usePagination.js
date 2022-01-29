@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { getMoviesByCategory } from '../services/fetchMovies'
+import { getMovies } from '../services/fetchMovies'
 
 export default function usePagination(numPage = 1) {
     let params = useParams()
+
     const [page, setPage] = useState(numPage)
     const [movies, setMovies] = useState([])
     const [, setCategory] = useState(params.category)
@@ -25,7 +26,7 @@ export default function usePagination(numPage = 1) {
     }
 
     useEffect(() => {
-        getMoviesByCategory(params.category, page)
+        getMovies({ query: searchParams.get('query'), category: params.category, page: page })
             .then((res) => {
                 setMovies(res)
 
@@ -36,7 +37,7 @@ export default function usePagination(numPage = 1) {
                 setIsLoading(false)
                 throw err
             })
-    }, [page, params.category])
+    }, [page, params.category, searchParams])
 
     useEffect(() => {
         if (searchParams.get('page')) {

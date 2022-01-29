@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { colors, fontSizes } from '../../stylesConfig'
 import { Link } from 'react-router-dom'
 import Rating from '../Rating'
+import noImg from '../../assets/no-image.png'
 
 const MovieContainer = styled(Link)`
     & {
@@ -71,7 +72,9 @@ const MovieTitle = styled.p`
     }
 `
 
-export default function Movie({ title, posterPath, voteAverage, id }) {
+export default function Movie({ title, posterPath = noImg, voteAverage, id }) {
+    let imgPath = posterPath
+    if (imgPath.endsWith('null')) imgPath = noImg
     return (
         <MovieContainer to={`/movie/${id}`}>
             <MovieItem>
@@ -79,7 +82,7 @@ export default function Movie({ title, posterPath, voteAverage, id }) {
                     <Rating text={voteAverage} fontSize={fontSizes.small} />
                 </RatingContainer>
                 <MovieImgContainer>
-                    <img src={posterPath} alt={title} />
+                    <img src={imgPath} alt={title} />
                 </MovieImgContainer>
                 <MovieTitle>{title}</MovieTitle>
             </MovieItem>

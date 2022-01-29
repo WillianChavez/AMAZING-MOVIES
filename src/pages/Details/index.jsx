@@ -21,6 +21,7 @@ export default function Details() {
     useEffect(() => {
         getMovieById(id)
             .then((movie) => {
+                window.scrollTo(0, 0)
                 setMovie(movie)
                 setIsLoading(false)
             })

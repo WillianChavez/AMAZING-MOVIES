@@ -10,7 +10,7 @@ const Slides = styled.div`
         width: 100%;
         overflow-x: scroll;
         overflow-y: hidden;
-        padding: 2em 4em 3em 2em;
+        padding: 2em 3em 3em 1em;
         gap: 3em;
         scroll-snap-type: x mandatory;
         height: 600px;

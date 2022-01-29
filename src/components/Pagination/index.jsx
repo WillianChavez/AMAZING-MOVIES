@@ -48,7 +48,7 @@ export default function Pagination({ page = 1, nextPage, prevPage }) {
     return (
         <Footer>
             <PaginationContainer>
-                <PaginnationButton to={`?page=${intPage - 1}`} className={page === 1 ? 'disable' : ''} onClick={prevPage}>
+                <PaginnationButton to={`?page=${intPage - 1}`} className={page === 1 || page === '1' ? 'disable' : ''} onClick={prevPage}>
                     &lt;
                 </PaginnationButton>
 

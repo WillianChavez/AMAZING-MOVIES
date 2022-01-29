@@ -87,13 +87,31 @@ export function getCategories() {
     return resources
 }
 
-export function getMoviesByCategory(category, page = 1) {
+export function getMovies({ query = '', category = null, page = 1 }) {
+    let url = `${baseURL}search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=${page}&include_adult=false`
+    if (category) {
+        return getMoviesByCategory({ category, page })
+    }
+    return fetch(url)
+        .then((res) => res.json())
+        .then((data) => data.results)
+        .then((movies) =>
+            movies.map((movie) => ({
+                poster_path: resourcesImgURL + movie.poster_path,
+                id: movie.id,
+                title: movie.title,
+                vote_average: parseFloat(movie.vote_average).toFixed(1),
+            }))
+        )
+}
+
+export function getMoviesByCategory({ category = '', page = 1 }) {
     let codeCategory
     let url
     if (category !== 'kids') {
         codeCategory = getCodeCategories()[category]
         url = `${baseURL}discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${codeCategory}&with_watch_monetization_types=flatrate`
-    } else {
+    } else if (category === 'kids') {
         url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&certification.lte=G&include_adult=false&include_video=false&page=1&year=2021&with_watch_monetization_types=flatrate`
     }
 
